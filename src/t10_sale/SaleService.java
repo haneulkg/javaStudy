@@ -2,7 +2,7 @@ package t10_sale;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+//
 public class SaleService {
 	Scanner scanner = new Scanner(System.in);
 	
