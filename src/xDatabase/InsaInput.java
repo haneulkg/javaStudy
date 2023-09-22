@@ -34,19 +34,19 @@ public class InsaInput extends JFrame {
 
 	int res = 0;
 	
-	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					InsaInput frame = new InsaInput();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-		new InsaInput();
-	}
+//	public static void main(String[] args) {
+////		EventQueue.invokeLater(new Runnable() {
+////			public void run() {
+////				try {
+////					InsaInput frame = new InsaInput();
+////					frame.setVisible(true);
+////				} catch (Exception e) {
+////					e.printStackTrace();
+////				}
+////			}
+////		});
+//		new InsaInput();
+//	}
 
 	public InsaInput() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
