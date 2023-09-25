@@ -13,6 +13,9 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
@@ -90,10 +93,18 @@ public class InsaMain extends JFrame {
 	
 		///////////////////////////////////////////////////////////////
 		
-		// 사원등록버튼
+		// 사원등록버튼을 마우스로 클릭했을때 수행
 		btnInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InsaInput();
+			}
+		});
+		
+		// 사원등록버튼을 키보드로 enter키를 누를때 수행
+		btnInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) new InsaInput();
 			}
 		});
 		
@@ -112,7 +123,7 @@ public class InsaMain extends JFrame {
 		// 전체사원조회
 		btnList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				new InsaList();
 			}
 		});
 		
@@ -122,8 +133,17 @@ public class InsaMain extends JFrame {
 				System.exit(0);
 			}
 		});
-	}
+		// 종료버튼을 키보드 enter키를 눌렀을 때 수행하기
+		btnExit.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) System.exit(0);
+			}
+		});
+	}	
 
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

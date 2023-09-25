@@ -1,11 +1,9 @@
 package xDatabase;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -33,20 +31,6 @@ public class InsaSearch extends JFrame {
 	InsaVO vo = null;
 
 	int res = 0;
-	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					InsaInput frame = new InsaInput();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//		new InsaSearch(vo);
-//	}
 	
 	public InsaSearch(InsaVO vo) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,6 +87,7 @@ public class InsaSearch extends JFrame {
 		pn2.add(lblIpsail);
 		
 		txtName = new JTextField();
+		txtName.setEditable(false);
 		txtName.setBackground(new Color(176, 196, 222));
 		txtName.setHorizontalAlignment(SwingConstants.CENTER);
 		txtName.setFont(new Font("경기천년바탕 Regular", Font.PLAIN, 25));
@@ -219,14 +204,49 @@ public class InsaSearch extends JFrame {
 		// 회원정보수정 버튼
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String age = txtAge.getText();
+				String gender = null;
+				String ipsail = cbYY.getSelectedItem()+"-"+cbMM.getSelectedItem()+"-"+cbDD.getSelectedItem();
 				
+				if(age.trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "나이를 입력하세요");
+					txtAge.requestFocus();
+				} 
+				else {
+					if(rdMale.isSelected()) gender = "남자";
+					else gender = "여자";
+				}
+				// 정상적으로 수정할 자료가 입력되어 넘어온다면 모든값을 vo에 담아서 DB에 수정처리한다(저장)
+				vo.setName(txtName.getText());
+				vo.setAge(Integer.parseInt(age));
+				vo.setGender(gender);
+				vo.setIpsail(ipsail);
+				
+				res = dao.setInsaUpdate(vo);
+				
+				if(res == 0) {
+					JOptionPane.showMessageDialog(null, "회원수정실패 - 다시 수정하세요");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "회원정보가 수정되었습니다.");
+				}
 			}
 		});
 		
-		// 다시입력 버튼
+		// 삭제 버튼
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				String name = txtName.getText();
+				int ans = JOptionPane.showConfirmDialog(null, name + "회원을 삭제하시겠습니까 ?","회원삭제",JOptionPane.YES_NO_OPTION);
+				if(ans == 0) {
+					res = dao.setInsaDelete(name);
+					if(res == 0) JOptionPane.showMessageDialog(null, "회원삭제실패 - 확인하세요");
+					else {
+						JOptionPane.showMessageDialog(null, "회원정보가 삭제되었습니다.");
+						dispose();
+					}
+				}
+				else JOptionPane.showMessageDialog(null, "회원삭제 취소");
 			}
 		});
 		
