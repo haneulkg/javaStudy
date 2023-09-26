@@ -83,7 +83,7 @@ public class InsaList extends JFrame {
 		cbCondition.setBackground(new Color(250, 235, 215));
 		cbCondition.setModel(new DefaultComboBoxModel(new String[] {"성명", "나이", "성별", "입사일"}));
 		cbCondition.setFont(new Font("경기천년바탕 Regular", Font.PLAIN, 15));
-		cbCondition.setBounds(23, 10, 96, 42);
+		cbCondition.setBounds(12, 11, 96, 42);
 		pn1.add(cbCondition);
 		
 		txtCondition = new JTextField();
