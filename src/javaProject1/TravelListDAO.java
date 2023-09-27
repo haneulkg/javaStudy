@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class TravelListDAO {
 	Connection conn = null;
@@ -51,6 +53,57 @@ public class TravelListDAO {
 		} catch (Exception e) {}
 		pstmtClose();
 	}
+
+	public ArrayList<TravelListVO> getSelect(String check) {
+		ArrayList<TravelListVO> vos = new ArrayList<TravelListVO>();
+		try {
+			sql = "select * from travelList where hashTag2 = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, check);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new TravelListVO();
+				vo.setArea(rs.getString("area"));
+				vo.setName(rs.getString("name"));
+				vo.setAddress(rs.getNString("address"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류 -- " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vos;
+	}
+
+	public ArrayList<TravelListVO> getTravelListSearch(String area) {
+		ArrayList<TravelListVO> vos = new ArrayList<TravelListVO>();
+		try {
+			sql = "select * from travelList where area = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, area);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new TravelListVO();
+				vo.setName(rs.getString("name"));
+				vo.setAddress(rs.getNString("address"));
+				vo.setHastTag1(rs.getString("hashTag1"));
+				vo.setHastTag2(rs.getString("hashTag2"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류 -- " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vos;
+	}
+
+	
 
 
 

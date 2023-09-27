@@ -52,6 +52,77 @@ public class MemberDAO {
 		pstmtClose();
 	}
 	
+	// 닉네임 중복 처리하기
+	public MemberVO getNickNameSearch(String nickName) {
+		vo = new MemberVO();
+		try {
+			sql = "select * from member where nickName = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nickName);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setIdx(rs.getInt("idx"));
+				vo.setName(rs.getString("name"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setEmail(rs.getString("email"));
+				vo.setAge(rs.getInt("age"));
+				vo.setPassword(rs.getInt("password"));
+				vo.setPhoneNum(rs.getString("phoneNum"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류 -- " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vo;
+	}
+	
+	// 회원 가입 처리하기
+	public int setMemberInput(MemberVO vo) {
+		int res = 0;
+		try {
+			sql = "insert into member value (default, ?, ?, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getNickName());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setInt(4, vo.getAge());
+			pstmt.setInt(5, vo.getPassword());
+			pstmt.setString(6, vo.getPhoneNum());
+			res = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL오류 -- " + e.getMessage());
+		} finally {
+			pstmtClose();
+		}
+		return res;
+	}
+
+	public MemberVO getLogin(String nickName) {
+		vo = new MemberVO();
+		try {
+			sql = "select * from member where nickName=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nickName);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setName(rs.getString("name"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setEmail(rs.getString("email"));
+				vo.setAge(rs.getInt("Age"));
+				vo.setPassword(rs.getInt("password"));
+				vo.setPhoneNum(rs.getString("phoneNum"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류 -- " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vo;
+	}
+	
 	
 	
 }

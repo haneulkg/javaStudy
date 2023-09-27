@@ -6,7 +6,6 @@ public class TravelListVO {
 	private String address;
 	private String hastTag1;
 	private String hastTag2;
-	private String hastTag3;
 	private String foodf;
 	private String foodfK;
 	private String foods;
@@ -44,12 +43,6 @@ public class TravelListVO {
 	}
 	public void setHastTag2(String hastTag2) {
 		this.hastTag2 = hastTag2;
-	}
-	public String getHastTag3() {
-		return hastTag3;
-	}
-	public void setHastTag3(String hastTag3) {
-		this.hastTag3 = hastTag3;
 	}
 	public String getFoodf() {
 		return foodf;
@@ -90,9 +83,9 @@ public class TravelListVO {
 	
 	@Override
 	public String toString() {
-		return "travelListVO [area=" + area + ", name=" + name + ", address=" + address + ", hastTag1=" + hastTag1
-				+ ", hastTag2=" + hastTag2 + ", hastTag3=" + hastTag3 + ", foodf=" + foodf + ", foodfK=" + foodfK
-				+ ", foods=" + foods + ", foodsK=" + foodsK + ", foodt=" + foodt + ", foodtK=" + foodtK + "]";
+		return "TravelListVO [area=" + area + ", name=" + name + ", address=" + address + ", hastTag1=" + hastTag1
+				+ ", hastTag2=" + hastTag2 + ", foodf=" + foodf + ", foodfK=" + foodfK + ", foods=" + foods
+				+ ", foodsK=" + foodsK + ", foodt=" + foodt + ", foodtK=" + foodtK + "]";
 	}
 	
 }

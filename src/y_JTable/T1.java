@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class T1 extends JFrame {
@@ -134,6 +135,10 @@ public class T1 extends JFrame {
 		// 6. JScrollPane을 패널에 올려주기
 		pn2.add(sp);
 		tbl.setFont(new Font("경기천년바탕 Regular", Font.PLAIN, 15));	// 디자인
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(0, 0, 5, 24);
+		pn2.add(textArea);
 		
 		////////////////////////////////////////////////////////////////////////////////
 		
